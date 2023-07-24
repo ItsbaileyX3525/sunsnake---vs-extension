@@ -1,0 +1,25 @@
+{
+  "name": "taptapir",
+  "displayName": "TapTapir",
+  "description": "syntax highlighting support fot taptapir",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "sunsnake",
+      "aliases": ["SunSnake", "sunsnake"],
+      "extensions": [".ss"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "sunsnake",
+      "scopeName": "source.ss",
+      "path": "./syntaxes/sunsnake.tmLanguage.json"
+    }]
+  }
+}
