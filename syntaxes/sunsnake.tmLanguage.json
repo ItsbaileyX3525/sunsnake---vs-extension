@@ -1,103 +1,132 @@
 {
-	"name": "sunsnake",
-	"scopeName": "source.ss",
-	"fileTypes": ["ss"],
-  
-	"patterns": [
-	  {
-		"include": "#comments"
-	  },
-	  {
-		"include": "#strings"
-	  },
-	  {
-		"include": "#numbers"
-	  },
-	  {
-		"include": "#operators"
-	  },  
-	  {
-		"include": "#functionName"
-	  },
-	  {
-		"include": "#keywords"
-	  },
-	  {
-		"include": "#punctuation"
-	  }
-	],
-  
-	"repository": {
-	  "comments": {
-		"patterns": [
-		  {
-			"name": "comment.line",
-			"match": "#.*$"
-		  }
-		]
-	  },
-	  "strings": {
-		"patterns": [
-		  {
-			"name": "string.quoted.single",
-			"begin": "'",
-			"end": "'"
-		  },
-		  {
-			"name": "string.quoted.double",
-			"begin": "\"",
-			"end": "\""
-		  }
-		]
-	  },
-	  "numbers": {
-		"patterns": [
-		  {
-			"name": "constant.numeric",
-			"match": "\\b\\d+\\b"
-		  }
-		]
-	  },
-	  "operators": {
-		"patterns": [
-		  {
-			"name": "keyword.operator",
-			"match": "\\+|-|\\*|\\/|\\="
-		  }
-		]
-	  },	  
-	  "functionName": {
-		"patterns": [
-		  {
-			"name": "entity.name.function",
-			"match": "(?<=\\bdef\\s)\\w+(?=\\()"
-		  },
-		  {
-			"name": "entity.name.function",
-			"match": "(?<=\\bdef\\s)\\w+(?=\\s*:\\s*)"
-		  }
-		]
-	  },
-	  "keywords": {
-		"patterns": [
-		  {
-			"name": "keyword",
-			"match": "\\b(def|True|False)\\b"
-		  },
-		  {
-			"name": "keyword.control",
-			"match": "\\b(while|for|if|else|in)\\b"
-		  }
-		]
-	},		
-	  "punctuation": {
-		"patterns": [
-		  {
-			"name": "punctuation",
-			"match": "\\(|\\)|\\{|\\}|\\[|\\]|,|;|:"
-		  }
-		]
-	  }
-	}
-  }
-  
+    "name": "sunsnake",
+    "scopeName": "source.ss",
+    "fileTypes": ["ss", "sunsnake", "ttr"],
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#operators"
+        },
+        {
+            "include": "#functionName"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#punctuation"
+        },
+        {
+            "include": "#variableDefinition"
+        },
+        {
+            "include": "#indentAfterColon"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line",
+                    "match": "#.*$"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.single",
+                    "begin": "'",
+                    "end": "'"
+                },
+                {
+                    "name": "string.quoted.double",
+                    "begin": "\"",
+                    "end": "\""
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "\\b\\d+\\b"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator",
+                    "match": "\\+|-|\\*|\\/|\\="
+                }
+            ]
+        },
+        "functionName": {
+            "patterns": [
+                {
+                    "name": "entity.name.function",
+                    "match": "(?<=\\bdef\\s)\\w+(?=\\()"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword",
+                    "match": "\\b(def|True|False)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(while|for|if|else|in|pass|continue|break)\\b"
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [
+                {
+                    "name": "punctuation",
+                    "match": "\\(|\\)|\\{|\\}|\\[|\\]|,|;"
+                }
+            ]
+        },
+        "variableDefinition": {
+            "patterns": [
+                {
+                    "name": "variable.definition",
+                    "match": "\\b(\\w+)\\s*="
+                }
+            ],
+            "captures": {
+                "1": {
+                    "name": "variable"
+                }
+            }
+        },
+        "indentAfterColon": {
+            "patterns": [
+                {
+                    "match": ":\\s*$",
+                    "name": "punctuation.whitespace.indent",
+                    "pop": true
+                }
+            ]
+        }
+    },
+    "onEnterRules": [
+        {
+            "beforeText": "^\\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\\s*$",
+            "action": {
+                "indent": "indent"
+            }
+        }
+    ]
+}

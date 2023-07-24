@@ -1,0 +1,13 @@
+test = True
+
+def test():
+    for _ in range(9):
+        print("Hello")
+    if test == False:
+        while False:
+            print("e")
+
+def test2():
+    e = 2 * 2
+
+#This is a comment
