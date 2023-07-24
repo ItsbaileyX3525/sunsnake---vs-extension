@@ -1,51 +1,103 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "SunSnake",
+	"name": "sunsnake",
+	"scopeName": "source.ss",
+	"fileTypes": ["ss"],
+  
 	"patterns": [
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#operators"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#numbers"
-		},
-		{
-			"include": "#reserved-words"
-		},
-		{
-			"include": "#ctrl-statements"
-		},
-		{
-			"captures": {
-			"2": {
-				"name": "entity.name.function.ss"
-			}
-			}
-		}
+	  {
+		"include": "#comments"
+	  },
+	  {
+		"include": "#strings"
+	  },
+	  {
+		"include": "#numbers"
+	  },
+	  {
+		"include": "#operators"
+	  },  
+	  {
+		"include": "#functionName"
+	  },
+	  {
+		"include": "#keywords"
+	  },
+	  {
+		"include": "#punctuation"
+	  }
 	],
+  
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.sunsnake",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.sunsnake",
+	  "comments": {
+		"patterns": [
+		  {
+			"name": "comment.line",
+			"match": "#.*$"
+		  }
+		]
+	  },
+	  "strings": {
+		"patterns": [
+		  {
+			"name": "string.quoted.single",
+			"begin": "'",
+			"end": "'"
+		  },
+		  {
+			"name": "string.quoted.double",
 			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.sunsnake",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": "source.ss"
-}
+			"end": "\""
+		  }
+		]
+	  },
+	  "numbers": {
+		"patterns": [
+		  {
+			"name": "constant.numeric",
+			"match": "\\b\\d+\\b"
+		  }
+		]
+	  },
+	  "operators": {
+		"patterns": [
+		  {
+			"name": "keyword.operator",
+			"match": "\\+|-|\\*|\\/|\\="
+		  }
+		]
+	  },	  
+	  "functionName": {
+		"patterns": [
+		  {
+			"name": "entity.name.function",
+			"match": "(?<=\\bdef\\s)\\w+(?=\\()"
+		  },
+		  {
+			"name": "entity.name.function",
+			"match": "(?<=\\bdef\\s)\\w+(?=\\s*:\\s*)"
+		  }
+		]
+	  },
+	  "keywords": {
+		"patterns": [
+		  {
+			"name": "keyword",
+			"match": "\\b(def|True|False)\\b"
+		  },
+		  {
+			"name": "keyword.control",
+			"match": "\\b(while|for|if|else|in)\\b"
+		  }
+		]
+	},		
+	  "punctuation": {
+		"patterns": [
+		  {
+			"name": "punctuation",
+			"match": "\\(|\\)|\\{|\\}|\\[|\\]|,|;|:"
+		  }
+		]
+	  }
+	}
+  }
+  
