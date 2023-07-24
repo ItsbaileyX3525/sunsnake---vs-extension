@@ -3,10 +3,29 @@
 	"name": "SunSnake",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#comments"
+		},
+		{
+			"include": "#operators"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#reserved-words"
+		},
+		{
+			"include": "#ctrl-statements"
+		},
+		{
+			"captures": {
+			"2": {
+				"name": "entity.name.function.ss"
+			}
+			}
 		}
 	],
 	"repository": {
